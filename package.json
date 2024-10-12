@@ -1,0 +1,20 @@
+{
+  "name": "iemma-giuliana",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "gastos",
+    "categorias",
+    "finanzas"
+  ],
+  "author": "Giuliana Iemma <giuliana.iemma@davinci.edu.ar>",
+  "license": "ISC",
+  "description": "API Restful para cargar gastos diarios categorizados",
+  "dependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
