@@ -5,4 +5,5 @@ const platformSchema = new mongoose.Schema ({
     url: {type: String, required: true}
 });
 
-export default mongoose.model('platforms', platformSchema);
+// export default mongoose.model('platforms', platformSchema);
+export default platformSchema;

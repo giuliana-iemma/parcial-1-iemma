@@ -1,0 +1,12 @@
+a{
+    text-decoration: none;
+}
+
+#app{
+    max-width: 1280px;
+    margin: auto;
+}
+
+section{
+    margin-block: 3rem;
+}
