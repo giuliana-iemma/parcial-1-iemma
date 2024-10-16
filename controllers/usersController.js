@@ -2,16 +2,32 @@ import Users from "../model/usersModel.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { usersValidation, usersLoginValidation } from "../validation/validation.js";
 
 dotenv.config();
 
 const secretKey = process.env.SECRET;
 
 export const createUser = async (req, res) => {
+        //Llamo la función que hicimos para validar y le paso el body.
+        const {error} = usersValidation(req.body);
+
+        if(error) {
+            return res.status(400).json({error: error.details[0].message}); 
+        }
+
     try{
         //Obtenemos los datos enviados por body
         const { name, lastname, password, email } = req.body;
         
+         // Verificamos si ya existe un usuario con el mismo correo electrónico
+         const existingUser = await Users.findOne({ email });
+
+             // Si existe, devolvemos un error
+        if (existingUser) {
+            return res.status(400).json({ error: "Este correo electrónico ya está en uso." });
+        }
+
         // Hasheamos la contraseña
         const hashedPassword = await bcrypt.hash(password, 10) 
 
@@ -52,31 +68,48 @@ export const getUserById = async (req, res) => {
     }
 }
 
-
-
 export const loginUser = async (req, res) => {
-    //Obtenemos los datos enviados por el usuario
-    const {email, password} = req.body;
-    //Buscamos el usuario en la ddbb por email
-    const user = await Users.findOne({email});
+     //Llamo la función que hicimos para validar y le paso el body.
+     const {error} = usersLoginValidation(req.body);
 
-    //Si no lo encuentra, devuelve error
-    if(!user) {
-        return res.status(404).json({message: "Usuario no encontrado"})
+     if(error) {
+         return res.status(400).json({error: error.details[0].message}); 
+     }
+
+    try{
+        //Obtenemos los datos enviados por el usuario
+        const {email, password} = req.body;
+        //Buscamos el usuario en la ddbb por email
+        const user = await Users.findOne({email});
+
+        //Si no lo encuentra, devuelve error
+        if(!user) {
+            return res.status(404).json({message: "Usuario no encontrado"})
+        }
+
+        //Comparamos la contraseña ingresadacon la hasheada y guardada en la ddbb
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        //Si no coincide, devolvemos error
+        if (!validPassword) {
+            return res.status(401).json({message: "Contraseña incorrecta"});
+        }
+
+        //Generamos el JWT
+        const token = jwt.sign(
+            {   id: user._id, 
+                email: user.email, 
+                issuedAt: Math.floor(Date.now() / 1000) //Identificamos cuándo fue generado el token y redondeamos el número para obtener el dato en segundos e identificar mejor. Esto sirve para obtener diferentes tokens cada vez que el usuario inicia sesión
+            }
+            , secretKey, 
+            { expiresIn: '1h' });
+
+
+        res.status(200).json({token, name: user.name, });
+    }catch (error){
+        res.status(400).json({error: error.message});
     }
-
-    //Comparamos la contraseña ingresadacon la hasheada y guardada en la ddbb
-    const validPassword = await bcrypt.compare(password, user.password);
-
-    //Si no coincide, devolvemos error
-    if (!validPassword) {
-        return res.status(401).json({message: "Contraseña incorrecta"});
-    }
-
-    //Generamos el JWT
-    const token = jwt.sign({id: user._id, email:user.email}, secretKey, {expiresIn: '1h'});
-
-    res.status(200).json({token});
+   
 }
 
 export const updateUser = async (req, res) => {

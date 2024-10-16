@@ -5,7 +5,7 @@ export const moviesValidation = (data) => {
     //Schemas
     const genreValSchema = Joi.object ({
         name: Joi.string().min(3).required(),  // El nombre de la plataforma es obligatorio
-        description: Joi.string().required()
+        description: Joi.string()
     });
 
     const platformValSchema = Joi.object ({
@@ -27,6 +27,16 @@ export const usersValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string().min(3).required(),
         lastname: Joi.string().min(3).required(),
+        //Recibe un array y en.items indicamos qué validaciones deben cumplir los items del array
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).max(30)
+    });
+    
+    return schema.validate(data)
+}
+
+export const usersLoginValidation = (data) => {
+    const schema = Joi.object({
         //Recibe un array y en.items indicamos qué validaciones deben cumplir los items del array
         email: Joi.string().email().required(),
         password: Joi.string().min(6).max(30)

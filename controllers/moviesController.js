@@ -7,7 +7,7 @@ import { moviesValidation } from "../validation/validation.js";
 export const createMovie = async (req, res) => {
     
     //Llamo la función que hicimos para validar y le paso el body.
-    const {error, value} = moviesValidation(req.body);
+    const {error} = moviesValidation(req.body);
 
     if(error) {
         return res.status(400).json({error: error.details[0].message}); 
@@ -56,10 +56,10 @@ export const getMoviesPagination = async (req, res) =>{
         const totalMovies = await Movie.countDocuments();
     
         res.status(200).json({
-            movies,
             currentPage: page,
             totalPages: Math.ceil (totalMovies / limit), //Mostramos el total de 
-            totalMovies
+            totalMovies,
+            movies
         });
     } catch (err) {
         res.status(400).json({error: err.message})

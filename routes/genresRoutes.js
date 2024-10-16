@@ -29,7 +29,7 @@ router.post('/genres', auth, createGenre);
 router.get('/genres', auth,  getAllGenres);
 router.get('/genres/:id', auth, getGenreById);
 router.get('/genres/name/:name', auth, getGenreByName);
-router.put('/genres/update/:id', auth, updateGenre);
-router.delete('/genres/delete/:id', auth, deleteGenre);
+router.put('/genres/:id', auth, updateGenre);
+router.delete('/genres/:id', auth, deleteGenre);
 
 export default router;
