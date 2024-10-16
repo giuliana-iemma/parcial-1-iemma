@@ -2,8 +2,6 @@ import mongoose, {Schema} from "mongoose"
 import genreSchema from '../model/genreModel.js'; 
 import platformSchema from '../model/platformsModel.js'; 
 
- 
-
 const movieSchema = new mongoose.Schema({
     //Armo la estructura con los campos que va a tener el modelo
     title: {type: String, required: true},

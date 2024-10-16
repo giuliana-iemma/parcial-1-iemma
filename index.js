@@ -1,6 +1,8 @@
 import express from "express"
 import mongoose from "mongoose"
 import moviesRoutes from "./routes/moviesRoutes.js"
+import genresRoutes from "./routes/genresRoutes.js"
+import usersRouter from "./routes/usersRoutes.js";
 import { verificarCuerpoVacio } from "./middleware/middleware.js";
 
 //Usando ES modules, la variable __filename no está disponible de manera predeterminada. Por eso usamos el módulo url  y la función import.meta.url para obtener el equivalente.
@@ -41,6 +43,9 @@ app.get("/", (req, res) => {
 });
 
 //Usamos las rutas que están cargadas en los otros archivos
-app.use('/api', moviesRoutes);
+app.use('/', moviesRoutes);
+app.use ('/', genresRoutes);
+app.use ('/', usersRouter);
+
 
 app.listen(port, () => console.log(`http://localhost:${port}`));

@@ -9,9 +9,99 @@
 </head>
 <body>
     <div id="app">
-        <section>
+        <header>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">MoviePickr</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#movies">Películas</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#users">Usuarios</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#genres">Géneros</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </header>
+
+        <section id="intro">
             <h1>MoviePickr</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus pariatur quod rem amet quam, tenetur excepturi nostrum, quae animi magnam accusamus totam ad possimus sunt. Eius, sed. Atque, velit delectus.</p>
+            <p>¿Te ha pasado que encuentras la película perfecta, pero no sabes en qué plataforma está disponible? ¡No te preocupes más!</p> <p>Hemos creado una API diseñada para que los usuarios puedan explorar fácilmente un amplio catálogo de películas y descubrir en qué plataformas pueden disfrutar de ellas. Simplificamos tu búsqueda para que puedas empezar a ver lo que te gusta, sin complicaciones.</p>
+
+            <div id="createUser" class="mt-3 instruction"> 
+                <h3>Registrarse</h3>
+                <p>Para poder acceder a la api, deberás registrarte primero.</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON</p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"name": "Tu nombre",</li>
+                                <li>"lastname": "Tu apellido",</li>
+                                <li>"email": "tuemail@email.com",
+                                </li>                                <li>"password": "Contraseña"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loginUser" class="mt-3 instruction"> 
+                <h3>Iniciar sesión</h3>
+                <p>Para poder acceder a la api, deberás iniciar sesión para obtener el Token. Solo necesitas colocar mail y contraseña.</p>
+                <p>Como respuesta a la petición recibirás el Token con el que podrás luego acceder a la API</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/login</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON</p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"email": "tuemail@email.com",
+                                </li>                                <li>"password": "Contraseña"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- <section>
@@ -32,12 +122,547 @@
                 </div>
         </section> -->
 
-        <section>
-            <h2>Instrucciones</h2>
+        <section id="movies" class="instruction">
+            <h2>Instrucciones - Películas</h2>
+            <div id="getMovies" class="mt-3 instruction"> 
+                <h3>Ver todas las películas</h3>
+                <p>Recuerda guardar el token obtenido cuando iniciaste sesión para poder acceder al contenido de la API</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="getMoviesPagination" class="mt-3 instruction"> 
+                <h3>Obtener películas en paginación</h3>
+                <p>Para poder ver las películas separadas en grupos en diferentes páginas, deberás proporcionar en tu URL los siguientes datos: </p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/pagination/{pagina}/{cantidad}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Página</p>
+                        <p class="url">Coloca el número de página que deseas ver</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Cantidad</p>
+                        <p class="url">Coloca el número de películas que deseas ver en cada página</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="getMoviesById" class="mt-3 instruction"> 
+                <h3>Buscar películas por el ID</h3>
+                <p>Para encontrar una película por el ID que tienen asignado en la base de datos deberás usar los siguientes parámetros: </p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>ID</p>
+                        <p class="url">Coloca el ID asignado en la base de datos a la película</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="getMoviesByName" class="mt-3 instruction"> 
+                <h3>Buscar películas por el nombre</h3>
+                <p>Para encontrar una película por el su título deberás usar los siguientes parámetros: </p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/title/{titulo-separado-con-guiones}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Titulo</p>
+                        <p class="url">Coloca el titulo de la película que estás buscando. Recuerda separar las palabras del título con guiones "-" </p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="getMoviesByGenre" class="mt-3 instruction"> 
+                <h3>Buscar películas por género</h3>
+                <p>Para encontrar una películas que posean determinados géneros deberás usar los siguientes parámetros: </p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/search/genre?genres={Action-Science_Fiction}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Género</p>
+                        <p class="url">Coloca el o los géneros que deseas buscar. Para separar diferentes géneros, usa "-". Para separar palabras dentro de un mismo género usa "_". Cada palabra debe iniciar con mayúscula, como se muestra en el ejemplo</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="getMoviesSortedTitle" class="mt-3 instruction"> 
+                <h3>Ver películas ordenadas alfabeticamente</h3>
+                <p>Para ver las películas en orden utiliza los siguientes parámetros: </p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/sorted/{a}{d}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>"A" "a"</p>
+                        <p class="url">Coloca la letra "a" en la URL para ver las películas en orden ascendente, es decir de la A a la Z</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>"D" "d"</p>
+                        <p class="url">Coloca la letra "d" en la URL para ver las películas en orden descendente, es decir de la Z a la A</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="createMovie" class="mt-3 instruction"> 
+                <h3>Agregar película</h3>
+                <p>Para poder agregar una nueva película, deberás utilizar los siguientes parámetros.</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON. </p>
+                    </div>
+
+                    <div class="list-group-item url-title">
+                        <p>Validaciones</p>
+                        <div class="d-flex flex-column">
+                        <p class="url"> <u class="">Título</u>: al menos 4 caracteres. Requerido</p>
+                        <p class="url"> <u class="">Descripción</u>: al menos  caracteres. Requerido</p>
+                        <p class="url"> <u class="">Genero</u>: Debe ser un array. Debe contener dos claves: "name" de al menos 3 caracteres y "description". Requerido</p>                        <p class="url"> <u class="">Plataformas</u>:Debe ser un array. Debe contener dos claves: "name" y "url". La URL debe poseer "http://" como encabezado. Requerido</p>
+                        </div>
+                    </div>
+
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"title": "Nuevo título",</li>
+                                <li>"description": "Descripción de la película",</li>
+
+                                <li class="embebido">
+                                    
+                                    "genre": [ 
+                                    <div class="array">
+                                    <span>{</span>
+                                       <span>"name": "Action"</span>  
+                                     <span>}</span>
+                                    <span>],</span> </li>
+
+                                    <li class="embebido">
+                                        "platforms": [ 
+                                        <div class="array">
+                                        <span>{</span>
+                                       <span>"name": "Netflix",</span>  
+                                       <span>"url": "http://www.netflix.com"</span>  
+                                         <span>}</span>
+                                        <span>]</span> </li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="updateMovies" class="mt-3 instruction"> 
+                <h3>Editar película</h3>
+                <p>Para poder editar una película, deberás utilizar los siguientes parámetros:</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">PUT</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON. Coloca únicamente los datos que quieras modificar. </p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"title": "Nuevo título"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteMovies" class="mt-3 instruction"> 
+                <h3>Borrar película</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/movies/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">DELETE</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <section id="users" class="instruction">
+            <h2>Instrucciones para manejar usuarios</h2>
 
+            <div id="createUser" class="mt-3 instruction"> 
+                <h3>Registrarse</h3>
+                <p>Para poder acceder a la api, deberás registrarte primero.</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Validaciones</p>
+                        <div class="d-flex flex-column">
+                        <p class="url"> <u>Nombre ("name)</u>: al menos 3 caracteres. Requerido</p>
+                        <p class="url"> <u>Apellido ("lastname)</u>: al menos  caracteres. Requerido</p>
+                        <p class="url"> <u>Email ("email)</u>: Debe cumplir con el formato email. Requerido</p>                        
+                        <p class="url"> <u class="">Contrasña ("password")</u>:Debe poseer entre 6 y 30 caracteres. Requerido</p>
+                        </div>
+                    </div>
+
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"name": "Tu nombre",</li>
+                                <li>"lastname": "Tu apellido",</li>
+                                <li>"email": "tuemail@email.com",
+                                </li>                                <li>"password": "Contraseña"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loginUser" class="mt-3 instruction"> 
+                <h3>Iniciar sesión</h3>
+                <p>Para poder acceder a la api, deberás iniciar sesión para obtener el Token. Solo necesitas colocar mail y contraseña.</p>
+                <p>Como respuesta a la petición recibirás el Token con el que podrás luego acceder a la API</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/login</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON</p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"email": "tuemail@email.com",
+                                </li>                                <li>"password": "Contraseña"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="getUsers" class="mt-3 instruction"> 
+                <h3>Ver todos los usuarios</h3>
+                <p>Para poder acceder a la api y ver los usuarios, deberás iniciar sesión para obtener el Token. Solo necesitas colocar mail y contraseña.</p>
+                <p>Como respuesta a la petición recibirás el Token con el que podrás luego acceder a la API</p>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="getUserById" class="mt-3 instruction"> 
+                <h3>Buscar usuarios por el ID</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>ID</p>
+                        <p class="url">Coloca el ID asignado en la base de datos al usuario</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <div id="updateUser" class="mt-3 instruction"> 
+                <h3>Editar usuario</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">PUT</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON. Coloca únicamente los datos que quieras modificar. </p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"name": "Nuevo nombre"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteUser" class="mt-3 instruction"> 
+                <h3>Borrar película</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/users/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">DELETE</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="genres" class="instruction">
+            <h2>Instrucciones - Géneros</h2>
+
+            <div id="getGenres" class="mt-3 instruction"> 
+                <h3>Ver todos los géneros</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="getGenreById" class="mt-3 instruction"> 
+                <h3>Buscar género por el ID</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>ID</p>
+                        <p class="url">Coloca el ID asignado en la base de datos al género</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="getGenreByName" class="mt-3 instruction"> 
+                <h3>Buscar géneros por el nombre</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres/name/{nombre-separado-con-guiones}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Nombre</p>
+                        <p class="url">Coloca el nombre del género que estás buscando. Recuerda separar las palabras del título con guiones "-" </p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">GET</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="createGenre" class="mt-3 instruction"> 
+                <h3>Agregar género</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">POST</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON. </p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"name": "Nuevo título",</li>
+                                <li>"description": "Descripción del género",</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="updateGenre" class="mt-3 instruction"> 
+                <h3>Editar género</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">PUT</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Body</p>
+                        <p class="url">JSON. Coloca únicamente los datos que quieras modificar. </p>
+                    </div>
+                    <div class="list-group-item code">
+                        <div class="json">
+                            <p>{</p>
+                            <ul>
+                                <li>"name": "Nuevo nombre"</li>
+                            </ul>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteGenre" class="mt-3 instruction"> 
+                <h3>Borrar género</h3>
+
+                <div class="list-group mt-3">
+                    <div class="list-group-item url-title">
+                        <p>URL</p>
+                        <p class="url">/genres/{id}</p>
+                    </div>
+                    <div class="list-group-item url-title">
+                        <p>Method</p>
+                        <p class="url">DELETE</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <footer>
+        <div class="card text-center">
+            <div class="card-header">
+                <h2>Datos</h2>
+            </div>
+            <div class="card-body">
+              <p class="card-text"> <span class="fw-bold">Estudiante: </span>Giuliana Iemma</p>
+              <p class="card-text"><span class="fw-bold">Materia: </span>Aplicaciones Híbridas</p>
+              <p class="card-text"><span class="fw-bold">Profesora: </span> MARCOS GALBÁN, Camila Belén	</p>
+              <p class="card-text"><span class="fw-bold">Comisión: </span>DWN4AV</p>
+            </div>
+            <div class="card-footer">
+                <p>2024</p>
+            </div>
+          </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

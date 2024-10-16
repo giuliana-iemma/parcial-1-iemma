@@ -1,19 +1,19 @@
 import express from "express"
 import Movie from "../model/moviesModel.js"
+import mongoose from "mongoose"
 import { moviesValidation } from "../validation/validation.js";
 
 //CREATE
 export const createMovie = async (req, res) => {
-   /*   //Validación
+    
     //Llamo la función que hicimos para validar y le paso el body.
-    const {error} = moviesValidation(req.body);;
+    const {error, value} = moviesValidation(req.body);
 
-    //Si algo anda mal, retorna un error. Si existe ese error, entonces le damos status 400 y le decimos cuales son los detalles del error.
-     if (error) return res.status(400).json({error: error.details[0].message})
-    console.log(error);
- */
+    if(error) {
+        return res.status(400).json({error: error.details[0].message}); 
+    }
 
-     try {
+        try {
         // Creo una nueva instancia del modelo Movie
         const newMovie = new Movie({...req.body});
 
@@ -36,6 +36,63 @@ export const getMovies = async (req, res) => {
     } catch(err){
         res.status(400).json({error: err.message})
     }
+}
+
+export const getMoviesPagination = async (req, res) =>{
+    try{
+        const page = req.params.page; //Número de página desde los parámetros
+
+        const limit = req.params.limit; //Cantidad a mostrar por página 
+    
+        //Calculamos los documentos que se deben saltear de la lista teniendo en cuenta la página en la que estemos posicionados.
+        //En la primera dará 0, por lo que no se saltarán documentos
+        const skip = (page - 1) * limit; 
+    
+        const movies = await Movie.find()
+            .skip(skip)
+            .limit (limit);
+    
+        //Vamos a mostrar también el total de documentos a mostrar para que el usuario pueda ver cuántos le quedan por recorrer
+        const totalMovies = await Movie.countDocuments();
+    
+        res.status(200).json({
+            movies,
+            currentPage: page,
+            totalPages: Math.ceil (totalMovies / limit), //Mostramos el total de 
+            totalMovies
+        });
+    } catch (err) {
+        res.status(400).json({error: err.message})
+    }
+   
+}
+
+export const getMoviesSortedTitle = async (req,res) =>{
+    try{
+        const order = req.params.order;
+        const orderLower = order.toLowerCase();
+        let moviesSorted; 
+
+        if (!order){
+            res.status(400).json({ message: "Debes colocar A o D para indicar cómo quieres ordenar las películas"});
+        } else if (orderLower == 'a'){
+           moviesSorted = await Movie.find().sort({title: 1}); //1 para orden ascendente
+        } else if(orderLower == 'd') {
+          moviesSorted = await Movie.find().sort({title: -1}); //1 para orden ascendente
+        } else {
+            res.status(400).json ({message: "El valor ingresado no es correcto Revisa las instrucciones e intenta nuevamente"});
+        }
+
+        if(moviesSorted.length == 0){
+            res.status(404).json ({message: "No se encontraron películas"});
+        }
+
+        res.status(200).json(moviesSorted);
+
+    } catch (err) {
+        res.status(400).json({  })
+    }
+
 }
 
 export const getMoviesById = async (req, res) => {

@@ -6,3 +6,6 @@ const userSchema = new mongoose.Schema ({
     email: {type: String, required: true},
     password: {type: String, required: true}
 });
+//Le pongo un nombre y le asigno el schema a ese nombre
+const Users = mongoose.model('Users', userSchema);
+export default Users;
